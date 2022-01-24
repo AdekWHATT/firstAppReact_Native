@@ -6,15 +6,15 @@ import * as ImagePicker from 'expo-image-picker'
 import * as Sharing from 'expo-sharing'
 
 export default function App() {
-  
+
   const [selectedImage, setSelectedImage] = useState(null)
   let openImagePickerAsync = async () => {
     let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
- if (permissionResult.granted === false) {
+    if (permissionResult.granted === false) {
       alert("Permission to access camera roll is required!");
       return;
     }
- let pickerResult = await ImagePicker.launchImageLibraryAsync();
+    let pickerResult = await ImagePicker.launchImageLibraryAsync();
     if (pickerResult.cancelled === true) {
       return
     }
@@ -29,8 +29,8 @@ export default function App() {
     }
 
     await Sharing.shareAsync(selectedImage.localUri);
-  }; 
-//
+  };
+  //
 
   if (selectedImage !== null) {
     return (
@@ -39,7 +39,7 @@ export default function App() {
           source={{ uri: selectedImage.localUri }}
           style={styles.thumbnail}
         />
-           <TouchableOpacity onPress={openShareDialogAsync} style={styles.btn}>
+        <TouchableOpacity onPress={openShareDialogAsync} style={styles.btn}>
           <Text style={styles.btnText}>Поделиться этой фотографией</Text>
         </TouchableOpacity>
       </View>
@@ -62,7 +62,6 @@ export default function App() {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
